@@ -2,7 +2,7 @@
 //import java.awt.*;
 import java.util.*;
 
-public class question1
+public class CardDealer
 {
 	public static void main(String[] args)
 	{
