@@ -9,78 +9,57 @@ public class question1
 		int times = Integer.parseInt(args[0]);  // iteration times
 		int num_deal = Integer.parseInt(args[1]); // number of players 
 		float goodness = Float.parseFloat(args[2]);  // goodness
-
+		float total_chance = 0;
+		float sum_chance = 0;
+////////////////////////		
+//		Hand testhand = new Hand();
+//		testhand.addCard(new Card(2, 0));
+//		testhand.addCard(new Card(3, 0));
+//		testhand.addCard(new Card(4, 0));
+//		testhand.addCard(new Card(6, 0));
+//		testhand.addCard(new Card(11, 0));
+//		int testres = testhand.hasStraight(3, true);
+//		System.out.println(testres);
+/////////////////////////		
+		
 		for (int i=0;i<times;i++) 
 		{
 			Deck deck = new Deck();
 	        deck.shuffle(goodness);
 //	        deck.print();
 			float num_stright = 0; 
+			 
 			for (int j=0;j<num_deal;j++) // number of players
 			{   
-				System.out.println("Cards of player "+j);
+//				System.out.println("Cards of player "+j);  //print No. of players
 
 				Hand playeri = new Hand();
-				playeri = deck.dealOne(); // print 5 cards that this player has.
-				for (int k = 0; k<5; k++) 
+				playeri = deck.dealOne(); 
+				for (int k = 0; k<5; k++)  // print 5 cards that this player has.
 				{	
 
-					System.out.println(playeri.getCard(k).print());
+//					System.out.println(playeri.getCard(k).print());  
 				}
-
-				int stright = 1; 
+				
+				int stright = playeri.hasStraight(3, false) ;
 				if (stright == 1) 
 				{
-					System.out.println("There's a stright! : ) ");
+//					System.out.println("There's a stright! : ) ");
 					num_stright++;
 				}
 				else {
-					System.out.println("There's no stright. : ( ");
+//					System.out.println("There's no stright. : ( ");
 				}			
 				
 			}
+//			System.out.println(num_stright++);
 			float possibility = num_stright/num_deal; 
-			System.out.println("Possibility: "+possibility);
-			deck.print();
-	}
-	
-	
-	
-	
-//	public static int hasStraight(int len, boolean sameSuit, Hand hand)
-//	{
-//		
-//		int res = 1;
-//		hand.sortBySuit();
-//		if (sameSuit == true) 
-//		{
-//			for (int i=0;i<len;i++) 
-//			{
-//				int flag1 = 0;
-//				if (hand.getCard(i).getSuit()==hand.getCard(i+1).getSuit()) 
-//				{
-//					flag1 = 1;
-//					res = res*flag1;						
-//				} 
-//			}
-//			return res;
-//		}
-//		else {
-//			if (sameSuit==true) 
-//			{
-//				for (int i=0;i<len;i++)
-//				{
-//					int flag2 = 0;
-//					if (hand.getCard(i).getValue()==(hand.getCard(i+1).getValue()-1)) 
-//					flag2 = 1;
-//					res = res*flag2;	
-//				}
-//			}
-//			return res;
-//		}
-//		
-//	}
-//
+			//System.out.println("Possibility: "+possibility);
+			sum_chance = sum_chance + possibility;
+//			deck.print();
+		}
+		total_chance = sum_chance/times;
+		System.out.println(total_chance);
 
 
 }
@@ -246,7 +225,8 @@ public static class Hand {
 
 	private Vector hand;   // The cards in the hand.
 	
-	public Hand() {
+	public Hand() 
+	{
 			  // Create a Hand object that is initially empty.
 		hand = new Vector();
 	}
@@ -334,7 +314,75 @@ public static class Hand {
 		}
 		hand = newHand;
 	}
+	
+// hasStright 
+	public int hasStraight(int len, boolean sameSuit)
+	{
+		int res = 1;
+//		Vector newHand = new Vector();
+//		System.out.println(this.getCardCount());
+		if (sameSuit == true) 
+		{
+			this.sortBySuit();
+			
+			int flag1 = 1;
+			for (int i=0;i<(len-1);i++)
+			{	
 
+				if ( (this.getCard(i).getValue()==(this.getCard(i+1).getValue()-1)) && (this.getCard(i).getSuit()==this.getCard(i+1).getSuit()) ) 
+					{
+						flag1++; 
+						if (flag1>2) 
+						{
+							break;
+						}
+					}
+
+				else if ( (this.getCard(i).getValue()==this.getCard(i+1).getValue()) && (this.getCard(i).getSuit()==this.getCard(i+1).getSuit()) )
+					{flag1 = flag1 + 0;}
+				else
+					{flag1 = 1;}						
+			}
+			if(flag1>2)
+				{res = 1;}
+			else 
+				{res = 0;}
+		}
+		else if (sameSuit == false) 
+			{
+				this.sortByValue();
+				int flag2 = 1;
+				for (int i=0;i<(len-1);i++)
+				{	
+					
+					if ( (this.getCard(i).getValue() + 1) == this.getCard(i+1).getValue() ) 
+						{
+							flag2++;
+							if (flag2>2)
+								{
+									break;
+								}
+						}
+						
+					else if (this.getCard(i).getValue()==this.getCard(i+1).getValue())
+						{
+							flag2 = flag2 + 0;
+						}
+					else
+						{
+							flag2 = 1;	
+						}					
+				}
+				if(flag2>2)
+					{res = 1;}
+				else 
+					{res = 0;}
+			}
+		return res;
+	}
+
+	
+// End of hasStright
 
 	
 }
