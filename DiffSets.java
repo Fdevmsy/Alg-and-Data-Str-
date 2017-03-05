@@ -16,6 +16,8 @@ public class DiffSets
 		int maxValue = Math.max(a, b);
 		System.out.println("a = "+a+ "  b = "+b);
 //		System.out.println("b = "+b);
+		float average_time = 0;
+		float sum_time = 0;
 		for (int n =0; n< iter; n++) 
 		{
 			List<Integer> listA = new ArrayList<Integer>();
@@ -31,14 +33,18 @@ public class DiffSets
 //			System.out.println("ListA: "+listA);
 //			System.out.println("ListB "+listB);
 //			System.out.println("Diffset: "+ getDiff(listA, listB));
+			long st = System.nanoTime();
 			getDiff(listA, listB);
+			sum_time = sum_time + (System.nanoTime()-st);
+			
 		}
-	
+		average_time = sum_time/iter;
+		System.out.println(average_time);
 	}
 
 
 	 private static List<Integer> getDiff(List<Integer> list1, List<Integer> list2) {
-		  long st = System.nanoTime();
+//		  long st = System.nanoTime();
 			List<Integer> diff = new ArrayList<Integer>();
 			List<Integer> maxList = list1;
 			List<Integer> minList = list2;
@@ -66,7 +72,7 @@ public class DiffSets
 					  diff.add(entry.getKey());
 				 }
 			}
-		  System.out.println("total times "+(System.nanoTime()-st));
+//		  System.out.println("total times "+(System.nanoTime()-st));
 		  return diff;
 		  
 	 }
