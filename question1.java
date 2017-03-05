@@ -19,14 +19,15 @@ public class question1
 			for (int j=0;j<num_deal;j++) // number of players
 			{   
 				System.out.println("Cards of player "+j);
-				Card[] playeri = new Card[5];
-				
+
+				Hand playeri = new Hand();
 				playeri = deck.dealOne(); // print 5 cards that this player has.
 				for (int k = 0; k<5; k++) 
 				{	
-					System.out.println(playeri[k].print());
+
+					System.out.println(playeri.getCard(k).print());
 				}
-//				int stright = hasStright(playeri);
+
 				int stright = 1; 
 				if (stright == 1) 
 				{
@@ -207,17 +208,18 @@ public static class Deck {
 				return 52 - cardsUsed;
 		}
 		
-		public Card[] dealOne() {
+		public Hand dealOne() {
 					// Deals one player with 5 cards.
 				if (cardsUsed == 52)
-					 shuffle(0);
-				Card[] player = new Card[5];
+					 shuffle(0);				
+				
+				Hand playerHand = new Hand();
 				for (int i=0; i<5; i++) 
 				{
-					player[i] = deck[cardsUsed];
+					playerHand.addCard(deck[cardsUsed]);				
 					cardsUsed++;
 				}
-				return player;
+				return playerHand;
 		}
 		
 		public void print()
