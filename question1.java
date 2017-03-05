@@ -9,7 +9,7 @@ public class question1
 		int times = Integer.parseInt(args[0]);  // iteration times
 		int num_deal = Integer.parseInt(args[1]); // number of players 
 		float goodness = Float.parseFloat(args[2]);  // goodness
-		float total_chance = 0;
+		float average_chance = 0;
 		float sum_chance = 0;
 ////////////////////////		
 //		Hand testhand = new Hand();
@@ -58,8 +58,8 @@ public class question1
 			sum_chance = sum_chance + possibility;
 //			deck.print();
 		}
-		total_chance = sum_chance/times;
-		System.out.println(total_chance);
+		average_chance = sum_chance/times;
+		System.out.println(average_chance);
 
 
 }
