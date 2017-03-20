@@ -1,0 +1,96 @@
+Questions: 
+
+Question 1: Shuffling
+
+Write an object oriented program with the following classes.
+
+=== Deck ===
+
+The Deck class represents a standard 52-card deck; Ace high
+Each card is in one of two states -- dealt (D) and not-yet-dealt (ND)
+Cards are ordered. The D and ND cards each have their own order
+When created, all 52 cards are ND, and are in order, by suit (clubs 2 through A, diamonds 2 through A, hearts 2 through A, spades 2 through A)
+methods:
+
+  dealOne() -- moves the top card from ND to D and returns the card
+  print() -- prints non-dealt cards and dealt-cards (in order, as separate lists)
+  shuffle(goodness) -- goodness is a floating point number between 0 and 1.
+Goodness of 0 is perfect shuffle (cards are in a completely random order). Goodness of 1 is no shuffling (deck is unchanged). As you change goodness from 0 to 1 the shuffle gets progressively worse. You can make up your own shuffle algorithm. Include a description of your shuffle algorithm in the README file. 
+
+=== Card ===
+
+The Card class represents a single card
+
+methods:
+
+  print() -- prints the type of card
+=== Hand ===  
+
+The Hand class represents a set of cards. From 0 to 52 cards, total
+Cards are always in a definite order
+methods:
+
+  print() -- prints the hand (in order)
+  addCard(card) -- adds a card to the hand
+  sortBySuit() -- sorts the cards by suit, and then by value
+  sortByValue() -- sorts by value, then by suit
+  hasStraight(len, sameSuit) -- returns true if hand contains a straight of the given length. If sameSuit is true, counts only straight with cards in the same suit (flushes); If sameSuit if not true, any straight is counted. A "straight" is simply when you have cards of consecutive values. For ex: A 3-card straight with sameSuit = false. The three cards may be of different suits, and it still counts as a 3-card straight if there are more than three consecutive cards. This hand has a 3-card straight:
+     4 of clubs, 5 of spades, 6 of diamonds 7 of clubs, K of clubs
+
+  This hand does not:
+
+     4 of clubs, 5 of clubs,  7 of clubs, 8 of spades, K of clubs
+
+ 
+
+Write a test program called CardDealer.java that takes three commandline arguments <number of runs> <number of players> <goodness>
+
+for ex: java CardDealer 100 5 0.5
+
+will run the following steps 100 times
+
+1. Create a deck of cards
+
+2. Shuffle using the goodness factor
+
+3. Deal 5 hands (going in order player1, player2, ... player5, player1....etc)
+
+4. Count the number of 3 card straights. 
+
+After 100 runs, compute the chances of getting a 3 card straight (this is defined as <number of 3 card straights>/<total number of hands>). For this run total number of hands will be 500. 
+
+Run your program for goodness values of (0, 0.3, 0.5, 1, 0.9). Tabulate your results in the README file.
+
+ 
+
+Difference between two sets. Given two arrays 𝚊[] and 𝚋[], each containing distinct values, design a subquadratic algorithm to count the number of values that are contained either in array 𝚊[] and array 𝚋[] but not both. Create test program DiffSets.java that takes three commandline arguments <size_of_a> <size_of_b> <number of iterations>
+
+For ex: java DiffSets 10 20 100
+
+The program must do the following
+
+1. Create arrays a and b of the mentioned size and fill it with uniformly random numbers between (0-max(size_a, size_b))  <- in this case this would be 0-20
+
+2. Find the numbers that are only present in a or b but not both.
+
+3. Repeat 1 and 2 for n iterations
+
+Run your program for various sizes of a and b (run each 100 times). Observe the running time of your algorithm (either using java's in-built timers or by using the system time). Tabulate your results in the README file. 
+
+(Writeup only): How would you extend this algorithm to find unique values in k lists. Can you still maintain the same running time?
+
+Question 3
+
+ 
+
+Stack with max. Create a data structure MaxStack that efficiently supports the stack operations (push and pop) and also a return-the-maximum operation (note: this does not remove the max from the stack). Assume the elements are numbers so that you can compare them. (Hint: what happens when the max value is popped ?). Answer the following questions in the README file
+
+1. What is the average case running time 
+
+2. Does your datastructure use any additional memory? 
+
+3. Can the use of addiitional memory help improve your running time?
+
+4. Have you considered approaches where the cost may be amortized? if so, what are they?
+
+Submission: Submit the java files along with the README file in a single zip. Leave all java classes in default package for ease of submission
